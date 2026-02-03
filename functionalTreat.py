@@ -1,4 +1,4 @@
-def display_menu() :
+def display_menu():
     """Display main menu"""
     print("\n----Main Menu----")
     print("1. Input Data")
@@ -9,17 +9,20 @@ def display_menu() :
     print("6. Display Dataset Statistics")
     print("7. Exit Program")
 
-def InputData() :
+
+def InputData():
     """Input for 1D Array Data"""
     val = input("\nEnter data of 1D Array\n(space separated) : ").split()
 
     data = []
-    for v in val :
+    for v in val:
         data.append(int(v))
-        print("\nYour data has been stored successfully!")
-        return data
 
-def DataSummary(data) :
+    print("\nYour data has been stored successfully!")
+    return data
+
+
+def DataSummary(data):
     """Display data summary using built-in functions"""
     print("\nData Summary:")
     print(f"  - Total elements: {len(data)}")
@@ -28,26 +31,30 @@ def DataSummary(data) :
     print(f"  - Sum of all values: {sum(data)}")
     print(f"  - Average value: {sum(data)/len(data):.2f}")
 
+
 def Factorial(n):
     """Calculate factorial using recursion"""
     if n == 0 or n == 1:
         return 1
     return n * Factorial(n - 1)
 
+
 def FactorialMenu():
     """Factorial menu"""
     num = int(input("\nEnter a number to calculate factorial: "))
     print(f"\nFactorial of {num} is: {Factorial(num)}")
 
+
 def LambdaFunction(data):
     """Filter data using lambda function"""
     tS = int(input("\nEnter a threshold value to filter out data above that value: "))
-    filter = list(filter(lambda x: x >= tS, data))
-    print(f"\nFiltered Data (values >= {tS}):")
+    filtered_data = list(filter(lambda x: x >= tS, data))
 
-    for item in filter:
+    print(f"\nFiltered Data (values >= {tS}):")
+    for item in filtered_data:
         print(item, end=", ")
     print()
+
 
 def SortData(data):
     """Sort data menu"""
@@ -59,14 +66,18 @@ def SortData(data):
     if choice == 1:
         sorted_data = sorted(data)
         order = "Ascending"
-    else:
+    elif choice == 2:
         sorted_data = sorted(data, reverse=True)
         order = "Descending"
+    else:
+        print("Invalid sorting choice!")
+        return
 
     print(f"\nSorted Data in {order} Order:")
     for item in sorted_data:
         print(item, end=", ")
     print()
+
 
 def DatasetStatisticsValue(data):
     """Return multiple dataset statistics"""
@@ -75,6 +86,7 @@ def DatasetStatisticsValue(data):
     total = sum(data)
     average = total / len(data)
     return minimum, maximum, total, average
+
 
 def DatasetStatistics(data):
     """Display dataset statistics"""
@@ -85,38 +97,45 @@ def DatasetStatistics(data):
     print(f"- Sum of all values: {total}")
     print(f"- Average value: {avg:.2f}")
 
+
 def main():
     """Main controller function"""
     data = []
     print("Welcome to the Data Analyzer and Transformer Program")
-    
-    while True :
+
+    while True:
         display_menu()
         ch = int(input("\nEnter your choice : "))
 
         if ch == 1:
-            print(InputData(__doc__))
             data = InputData()
 
         elif ch == 2:
-            print(DataSummary(__doc__))
-            DataSummary(data)
+            if not data:
+                print("Please input data first!")
+            else:
+                DataSummary(data)
 
         elif ch == 3:
-            print(FactorialMenu(__doc__))
             FactorialMenu()
 
         elif ch == 4:
-            print(LambdaFunction(__doc__))
-            LambdaFunction(data)
+            if not data:
+                print("Please input data first!")
+            else:
+                LambdaFunction(data)
 
         elif ch == 5:
-            print(SortData(__doc__))
-            SortData(data)
+            if not data:
+                print("Please input data first!")
+            else:
+                SortData(data)
 
         elif ch == 6:
-            print(DatasetStatistics(__doc__))
-            DatasetStatistics(data)
+            if not data:
+                print("Please input data first!")
+            else:
+                DatasetStatistics(data)
 
         elif ch == 7:
             print("\nThank you for using the Data Analyzer and Transformer Program. Goodbye!")
@@ -125,3 +144,5 @@ def main():
         else:
             print("\nInvalid choice! Please try again.")
 
+
+main()
